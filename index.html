@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>Ardino Tri Afrilion · Portfolio</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #faf9fc;
+      color: #1e1e2a;
+      line-height: 1.5;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark {
+      background: #12121a;
+      color: #eaeaf0;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    /* scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #eee;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #7c6df0;
+      border-radius: 12px;
+    }
+
+    /* navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.7);
+      border-bottom: 1px solid rgba(0,0,0,0.03);
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      transition: background 0.3s;
+    }
+    body.dark .navbar {
+      background: rgba(18, 18, 30, 0.8);
+      border-bottom: 1px solid #2b2b3a;
+    }
+    .brand {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.4rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #6c5ce7;
+      color: #6c5ce7;
+    }
+    .dark-toggle {
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: #2d2d3f;
+      margin-left: 0.5rem;
+    }
+    body.dark .dark-toggle {
+      color: #d0cdf0;
+    }
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 3rem;
+    }
+
+    /* sections */
+    section {
+      margin: 4rem 0 5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .section-title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 1.8rem;
+      letter-spacing: -0.5px;
+      background: linear-gradient(145deg, #2d2b4a, #6c5ce7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    /* hero */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2.5rem;
+      margin-top: 1rem;
+    }
+    .hero-content {
+      flex: 1 1 400px;
+    }
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+    }
+    .hero-content .subhead {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #6a6a82;
+      margin: 0.6rem 0 1.2rem;
+    }
+    body.dark .hero-content .subhead { color: #b8b4d4; }
+    .hero-content p {
+      font-size: 1.1rem;
+      max-width: 550px;
+    }
+    .btn-group {
+      margin: 2rem 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: 0.25s ease;
+      background: #6c5ce7;
+      color: white;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(108, 92, 231, 0.25);
+    }
+    .btn-outline {
+      background: transparent;
+      color: #1e1e2a;
+      border: 1.5px solid #1e1e2a;
+      box-shadow: none;
+    }
+    body.dark .btn-outline {
+      color: #eaeaf0;
+      border-color: #eaeaf0;
+    }
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(108, 92, 231, 0.4);
+    }
+    .btn-outline:hover {
+      background: #1e1e2a;
+      color: white;
+    }
+    body.dark .btn-outline:hover {
+      background: #eaeaf0;
+      color: #12121a;
+    }
+    .hero-image {
+      flex: 0 0 200px;
+      text-align: center;
+    }
+    .hero-image img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 60% 40% 50% 40% / 40% 50% 40% 60%;
+      background: #ddd;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      transition: 0.4s;
+      border: 4px solid white;
+    }
+    body.dark .hero-image img { border-color: #2b2b3a; }
+
+    /* cards */
+    .info-card {
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(4px);
+      border-radius: 28px;
+      padding: 1.5rem 1.8rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+      border: 1px solid rgba(255,255,255,0.4);
+      transition: 0.25s;
+    }
+    body.dark .info-card {
+      background: rgba(30, 30, 50, 0.6);
+      border-color: #33334a;
+    }
+    .info-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(108, 92, 231, 0.08);
+    }
+    .info-card i {
+      color: #6c5ce7;
+      font-size: 1.6rem;
+      margin-right: 0.6rem;
+    }
+
+    /* testimoni carousel sederhana */
+    .testi-grid {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .testi-item {
+      flex: 1 1 220px;
+      background: #f0edff;
+      padding: 1.5rem;
+      border-radius: 30px;
+      font-style: italic;
+      transition: 0.2s;
+    }
+    body.dark .testi-item {
+      background: #25253a;
+    }
+    .testi-item strong {
+      display: block;
+      margin-top: 0.8rem;
+      font-style: normal;
+    }
+
+    /* gallery masonry */
+    .gallery-masonry {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1.2rem;
+    }
+    .gallery-item {
+      background: #e2defa;
+      border-radius: 24px;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: 0.2s;
+      cursor: pointer;
+      background-size: cover;
+      background-position: center;
+      color: #1e1e2a;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    body.dark .gallery-item {
+      background: #2d2d48;
+      color: #cbc8f0;
+    }
+    .gallery-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 28px rgba(108, 92, 231, 0.15);
+    }
+    .gallery-item .caption {
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(2px);
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      color: white;
+    }
+
+    /* contact form */
+    .contact-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+    }
+    .contact-form {
+      flex: 2 1 300px;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      margin-bottom: 1rem;
+      border-radius: 30px;
+      border: 1px solid #d5d0eb;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(2px);
+      font-family: inherit;
+      transition: 0.2s;
+    }
+    body.dark .contact-form input,
+    body.dark .contact-form textarea {
+      background: #25253a;
+      border-color: #45456a;
+      color: #f0ecff;
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      outline: none;
+      border-color: #6c5ce7;
+      box-shadow: 0 0 0 4px rgba(108,92,231,0.15);
+    }
+
+    /* footer */
+    footer {
+      border-top: 1px solid rgba(0,0,0,0.05);
+      padding: 2.5rem 2rem 1.8rem;
+      text-align: center;
+      margin-top: 2rem;
+    }
+    body.dark footer {
+      border-top-color: #2a2a3e;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.4rem;
+      font-size: 1.8rem;
+      margin: 1.2rem 0;
+    }
+    .social-icons a {
+      transition: 0.2s;
+      color: #2d2b4a;
+    }
+    body.dark .social-icons a { color: #cbc8f0; }
+    .social-icons a:hover {
+      color: #6c5ce7;
+      transform: scale(1.1);
+    }
+    .fun-fact {
+      background: #f0edff;
+      border-radius: 40px;
+      padding: 1.8rem 2.2rem;
+      margin: 2rem 0;
+    }
+    body.dark .fun-fact {
+      background: #25253a;
+    }
+
+    /* responsive */
+    @media (max-width: 768px) {
+      .navbar { padding: 0.8rem 1.2rem; flex-wrap: wrap; }
+      .nav-links { display: none; width: 100%; flex-direction: column; gap: 0.8rem; margin-top: 0.8rem; }
+      .nav-links.show { display: flex; }
+      .hamburger { display: block; }
+      .hero-content h1 { font-size: 2.6rem; }
+      .hero-image { flex-basis: 140px; }
+      .hero-image img { width: 140px; height: 140px; }
+      .section-title { font-size: 2rem; }
+    }
+    @media (min-width: 769px) {
+      .nav-links { display: flex !important; }
+      .hamburger { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- navbar -->
+  <nav class="navbar">
+    <div class="brand">ARDINO.</div>
+    <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About Me</a>
+      <a href="#cv">CV</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#social">Social Media</a>
+      <a href="#contact">Contact</a>
+      <a href="#testimoni">Testimonial</a>
+      <button class="dark-toggle" id="darkToggle"><i class="fas fa-moon"></i></button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- HOME -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1>ARDINO TRI AFRILION</h1>
+        <div class="subhead">Student · Music Enthusiast · Future Singer · Future TV Crew</div>
+        <p>Halo! Saya Ardino Tri Afrilion. Seorang pelajar yang memiliki mimpi besar di dunia musik dan media. Saya percaya bahwa setiap mimpi membutuhkan proses, keberanian, dan kerja keras untuk dapat diwujudkan.</p>
+        <div class="btn-group">
+          <a href="#about" class="btn">Tentang Saya</a>
+          <a href="#portfolio" class="btn btn-outline">Lihat Karya</a>
+          <a href="#contact" class="btn btn-outline">Hubungi Saya</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://ui-avatars.com/api/?name=Ardino+Tri+Afrilion&size=200&background=6c5ce7&color=fff&bold=true&font-size=0.5" alt="Ardino profil">
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2 class="section-title">Tentang Saya</h2>
+      <div style="display:flex; flex-wrap:wrap; gap:2rem;">
+        <div style="flex:2; min-width:240px;">
+          <p style="font-size:1.1rem;">Saya adalah Ardino Tri Afrilion, seorang pelajar yang lahir pada 9 April 2010. Saya memiliki ketertarikan besar terhadap dunia musik, terutama menyanyi dan berbagai perkembangan dalam industri hiburan.</p>
+          <p style="margin-top:1rem;">Bagi saya, musik bukan hanya sekadar hiburan, tetapi juga menjadi cara untuk mengekspresikan diri dan menyampaikan perasaan. Saya memiliki cita-cita untuk menjadi seorang penyanyi profesional serta bekerja di dunia televisi sebagai kru.</p>
+          <p style="margin-top:1rem;">Selain menyanyi, saya juga menyukai musik, terutama K-Pop. Saya senang mempelajari hal-hal baru dan terus berusaha mengembangkan kemampuan yang saya miliki. Saya percaya bahwa kesuksesan tidak datang secara instan. Setiap proses, pengalaman, keberhasilan, bahkan kegagalan adalah bagian dari perjalanan untuk menjadi pribadi yang lebih baik.</p>
+        </div>
+        <div style="flex:1; min-width:200px; display:grid; gap:0.8rem;">
+          <div class="info-card"><i class="fas fa-user"></i> Nama: Ardino Tri Afrilion</div>
+          <div class="info-card"><i class="fas fa-calendar"></i> Lahir: 9 April 2010</div>
+          <div class="info-card"><i class="fas fa-music"></i> Hobi: Menyanyi, Tidur, Musik</div>
+          <div class="info-card"><i class="fas fa-heart"></i> Minat: Musik, Broadcasting, TV</div>
+          <div class="info-card"><i class="fas fa-star"></i> Cita-cita: Penyanyi & Kru TV</div>
+          <div class="info-card"><i class="fas fa-hand-holding-heart"></i> Love Language: Physical Touch</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CV -->
+    <section id="cv">
+      <h2 class="section-title">CV / Curriculum Vitae</h2>
+      <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap:1.5rem;">
+        <div class="info-card"><i class="fas fa-graduation-cap"></i> <strong>Pendidikan</strong><br>SMA / Sederajat (Pelajar)</div>
+        <div class="info-card"><i class="fas fa-trophy"></i> <strong>Prestasi</strong><br>Perwakilan Sekolah OSN Matematika<br>Juara 1 Lomba Paduan Suara Ekspresi</div>
+        <div class="info-card"><i class="fas fa-users"></i> <strong>Organisasi</strong><br>Koordinator Paduan Suara</div>
+        <div class="info-card"><i class="fas fa-microphone-alt"></i> <strong>Keahlian</strong><br>Vokal, Public Speaking, Komunikasi, Kerja Tim, Kepemimpinan, Broadcasting dasar, Kreativitas</div>
+        <div class="info-card"><i class="fas fa-headphones"></i> <strong>Minat</strong><br>Musik, K-Pop, Menyanyi, Media Kreatif</div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio">
+      <h2 class="section-title">Hasil Karya</h2>
+      <div class="card-grid">
+        <div class="info-card"><i class="fas fa-music"></i> <strong>Musik & Vokal</strong><br>Cover lagu, project vokal</div>
+        <div class="info-card"><i class="fas fa-broadcast-tower"></i> <strong>Broadcasting</strong><br>Karya penyiaran, produksi media</div>
+        <div class="info-card"><i class="fas fa-video"></i> <strong>Video Project</strong><br>Video kreatif, konten</div>
+        <div class="info-card"><i class="fas fa-calendar-check"></i> <strong>Organisasi & Kegiatan</strong><br>Dokumentasi paduan suara & kegiatan</div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+      <h2 class="section-title">Gallery</h2>
+      <div class="gallery-masonry">
+        <div class="gallery-item" style="background-image: linear-gradient(145deg, #b8affa, #7c6df0);"><span class="caption">Kegiatan Sekolah</span></div>
+        <div class="gallery-item" style="background-image: linear-gradient(145deg, #f3b0c3, #c97d9e);"><span class="caption">Paduan Suara</span></div>
+        <div class="gallery-item" style="background-image: linear-gradient(145deg, #ffe69b, #f7c948);"><span class="caption">Prestasi</span></div>
+        <div class="gallery-item" style="background-image: linear-gradient(145deg, #9cd1e6, #5f9fc0);"><span class="caption">Musik</span></div>
+        <div class="gallery-item" style="background-image: linear-gradient(145deg, #c2b0e6, #8a72c4);"><span class="caption">Broadcasting</span></div>
+        <div class="gallery-item" style="background-image: linear-gradient(145deg, #a8d5b0, #6baa7a);"><span class="caption">Sehari-hari</span></div>
+        <div class="gallery-item" style="background-image: linear-gradient(145deg, #f5a3a3, #d46a6a);"><span class="caption">Video</span></div>
+      </div>
+      <p style="margin-top:0.8rem; font-size:0.9rem; opacity:0.7;">✨ Klik foto untuk memperbesar (placeholder interaktif)</p>
+    </section>
+
+    <!-- SOCIAL MEDIA -->
+    <section id="social">
+      <h2 class="section-title">Let's Connect</h2>
+      <p style="font-size:1.2rem;">Yuk terhubung dan ikuti perjalanan saya melalui berbagai platform media sosial.</p>
+      <div style="display:flex; gap:2.5rem; flex-wrap:wrap; margin:2rem 0;">
+        <a href="#" style="display:flex; align-items:center; gap:0.6rem; font-size:1.4rem;"><i class="fab fa-instagram" style="color:#e4405f;"></i> @afrilionlovestruck</a>
+        <a href="#" style="display:flex; align-items:center; gap:0.6rem; font-size:1.4rem;"><i class="fab fa-youtube" style="color:#ff0000;"></i> @afrilionlovestruck</a>
+        <a href="#" style="display:flex; align-items:center; gap:0.6rem; font-size:1.4rem;"><i class="fab fa-tiktok" style="color:#000;"></i> @eunhagotme</a>
+      </div>
+      <p style="font-style:italic;">Let's connect! Follow perjalanan, karya, dan aktivitas saya melalui media sosial.</p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2 class="section-title">Hubungi Saya</h2>
+      <p>Punya pertanyaan, ingin berkolaborasi, atau sekadar ingin terhubung? Jangan ragu untuk menghubungi saya.</p>
+      <div class="contact-wrap">
+        <div class="contact-form">
+          <input type="text" placeholder="Nama" value="Ardino">
+          <input type="email" placeholder="Email" value="ardino@example.com">
+          <input type="text" placeholder="Subjek" value="Kolaborasi">
+          <textarea rows="3" placeholder="Pesan...">Halo Ardino, saya ingin berdiskusi tentang musik!</textarea>
+          <button class="btn" style="width:100%;">Kirim Pesan</button>
+        </div>
+        <div style="flex:1; min-width:160px;">
+          <div class="info-card"><i class="fab fa-instagram"></i> @afrilionlovestruck</div>
+          <div class="info-card"><i class="fab fa-youtube"></i> @afrilionlovestruck</div>
+          <div class="info-card"><i class="fab fa-tiktok"></i> @eunhagotme</div>
+          <div class="info-card"><i class="fab fa-whatsapp"></i> +62 812-3456-7890</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONI -->
+    <section id="testimoni">
+      <h2 class="section-title">Apa Kata Mereka?</h2>
+      <div class="testi-grid">
+        <div class="testi-item">“Ardino adalah pribadi yang aktif, kreatif, dan memiliki semangat yang tinggi dalam mengembangkan kemampuannya.” <strong>— Guru Seni</strong></div>
+        <div class="testi-item">“Memiliki kemampuan bekerja sama yang baik serta memiliki ketertarikan dan potensi dalam bidang musik dan komunikasi.” <strong>— Teman Organisasi</strong></div>
+        <div class="testi-item">“Dedikasi dan konsistensi Ardino di paduan suara sangat menginspirasi. Pemimpin yang baik!” <strong>— Koordinator Seni</strong></div>
+      </div>
+    </section>
+
+    <!-- INSPIRATION + FUN FACTS (digabung) -->
+    <section id="inspiration" style="display:grid; grid-template-columns: 1fr 1fr; gap:2rem; align-items:start;">
+      <div>
+        <h2 class="section-title" style="margin-bottom:0.2rem;">My Inspiration</h2>
+        <h3 style="font-weight:400; color:#6c5ce7;">Lyodra Ginting</h3>
+        <p style="margin-top:1rem;">Salah satu sosok yang menjadi inspirasi saya dalam dunia musik adalah Lyodra Ginting. Saya mengagumi kemampuan vokalnya, kerja kerasnya, konsistensinya dalam berkarya, serta keberaniannya dalam memiliki karakter bermusik sendiri.</p>
+        <p style="margin-top:1rem;">Bagi saya, perjalanan seorang penyanyi tidak hanya tentang memiliki suara yang bagus, tetapi juga tentang kerja keras, proses, dan keberanian untuk terus berkembang.</p>
+        <div style="margin-top:1rem; display:flex; gap:1rem; flex-wrap:wrap;">
+          <span class="info-card" style="padding:0.4rem 1.2rem;">🎤 Vokal luar biasa</span>
+          <span class="info-card" style="padding:0.4rem 1.2rem;">🌟 Konsistensi</span>
+        </div>
+      </div>
+      <div>
+        <h2 class="section-title" style="margin-bottom:0.2rem;">Fun Facts</h2>
+        <div class="fun-fact">
+          <ul style="list-style: none; font-size:1rem;">
+            <li>😴 Hobi saya bukan cuma menyanyi, tapi juga tidur.</li>
+            <li>🎶 Musik adalah salah satu hal yang paling dekat dengan kehidupan saya.</li>
+            <li>🇰🇷 Saya suka K-Pop.</li>
+            <li>🎤 Saya bercita-cita menjadi penyanyi profesional dan kru TV.</li>
+            <li>🤗 Love language saya adalah Physical Touch.</li>
+            <li>💕 Tipe ideal saya: manis, dewasa, pintar, mengerti keadaan, dan bonus poin kalau rambutnya ikal... upszz 😁</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="#"><i class="fab fa-tiktok"></i></a>
+    </div>
+    <p style="font-weight:300;">© 2026 Ardino Tri Afrilion. All Rights Reserved.</p>
+    <p style="font-style:italic; letter-spacing:0.5px; margin-top:0.3rem;">Dream Big, Sing Loud, and Keep Creating.</p>
+  </footer>
+
+  <script>
+    // dark mode
+    const toggle = document.getElementById('darkToggle');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      toggle.innerHTML = document.body.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    });
+
+    // hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+
+    // smooth gallery click (mock)
+    document.querySelectorAll('.gallery-item').forEach(el => {
+      el.addEventListener('click', () => {
+        alert('✨ Gallery preview: ' + (el.querySelector('.caption')?.innerText || 'foto'));
+      });
+    });
+
+    // fade animation on scroll (simple)
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.style.opacity = '1';
+      });
+    }, { threshold: 0.1 });
+    sections.forEach(sec => observer.observe(sec));
+  </script>
+</body>
+</html>
